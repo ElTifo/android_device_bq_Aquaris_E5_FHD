@@ -13,5 +13,5 @@ $(call inherit-product, device/bq/Aquaris_E5_FHD/device_Aquaris_E5_FHD.mk)
 PRODUCT_DEVICE := Aquaris_E5_FHD
 PRODUCT_NAME := cm_Aquaris_E5_FHD
 PRODUCT_BRAND := bq
-PRODUCT_MODEL := Aquaris_E5_FHD
+PRODUCT_MODEL := Aquaris E5 FHD
 PRODUCT_MANUFACTURER := bq
