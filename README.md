@@ -24,7 +24,7 @@ Trying to adapt kingzone k1 turbo specs to Aquaris E5 FHD (similar MT6592 device
         
         # source build/envsetup.sh
         
-        # brunch cm_k1_turbo-userdebug
+        # brunch cm_Aquaris_E5_FHD-userdebug
 
 # MTK
 
