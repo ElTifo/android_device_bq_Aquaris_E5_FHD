@@ -1,27 +1,25 @@
-import init.mt6592.usb.rc
+# MTK platform .rc configure
+
+import init.project.rc
+import init.ssd.rc
 import init.modem.rc
 
 on init
     export LD_PRELOAD /system/lib/libxlog.so
-    export EXTERNAL_STORAGE /storage/sdcard0
-    export SECONDARY_STORAGE /storage/sdcard1
-
-    mkdir /storage/sdcard0 0700 root root
-    mkdir /storage/sdcard1 0700 root root
-
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-
-    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-
-    # USB OTG
-    mkdir /storage/usbotg 0700 root root
-    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+	
+	export USBOTG_STORAGE /storage/usbotg
+	export SECONDARY_STORAGE /storage/sdcard1
+	
+	#Create CIP mount point
+    mkdir /custom
 
     chown system graphics /dev/ion
-    chmod 0644 /dev/ion
-
+    chmod 0666 /dev/ion
+	
+	# change lk_env permission
+    chown root system /proc/lk_env
+    chmod 0666 /proc/lk_env
+	
     # TODO: fix system apps run with unknown user resume 0660
     chmod 0666 /dev/mali
     chown system graphics /dev/mali
@@ -107,10 +105,11 @@ on init
     chmod 0660 /dev/kd_camera_flashlight
     chmod 0660 /dev/kd_camera_hw_bus2
     chmod 0660 /dev/FM50AF
-    chmod 0660 /dev/DW9714AF
+    chmod 0660 /dev/BU6424AF
     chmod 0660 /dev/DW9718AF
     chmod 0660 /dev/OV8825AF
     chmod 0660 /dev/CAM_CAL_DRV
+	chmod 0660 /dev/EEPROM_M24C08F
 
     chown system camera /dev/camera-sysram
     chown system camera /dev/camera-isp
@@ -119,10 +118,11 @@ on init
     chown system camera /dev/kd_camera_flashlight
     chown system camera /dev/kd_camera_hw_bus2
     chown system camera /dev/FM50AF
-    chown system camera /dev/DW9714AF
+    chown system camera /dev/BU6424AF
     chown system camera /dev/DW9718AF
     chown system camera /dev/OV8825AF
     chown system camera /dev/CAM_CAL_DRV
+	chown system camera /dev/EEPROM_M24C08F
 
     chown system system /dev/RT_Monitor
     chmod 0600 /dev/RT_Monitor
@@ -136,6 +136,14 @@ on init
     chmod 0660 /dev/mtk_sched
     chown system media /dev/ebc
     chmod 0660 /dev/ebc
+	
+	#sensorhub
+    chmod 0660 /dev/shf
+    chown system system /dev/shf
+	
+	#rgb blink
+    chmod 0660 /dev/rgb_blink
+    chown system system /dev/rgb_blink
 
     # Sensor
     chmod 0666 /dev/hwmsensor
@@ -240,21 +248,34 @@ on init
     # TV-out
     chmod 0664 /dev/TV-out
 
-    #H DMI
-    chown meida system /dev/hdmitx
+    #HDMI
+    chown media graphics /dev/hdmitx
     chmod 0664 /dev/hdmitx
 
     # JPEG
     chmod 0444 /dev/mtk_jpeg
     chown system camera /dev/mtk_jpeg
+	
+	#ALMK
+    chmod 0440 /dev/mtk_almk
+
+    # DISP
+    chmod 0440 /dev/mtk_disp
+    chown system system /dev/mtk_disp
 
 on post-fs-data
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    chmod 0660 /data/misc/wifi/wpa_supplicant.conf
+	chmod 0660 /data/misc/wifi/p2p_supplicant.conf
+    
+	mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
+	
+	# dhcp server
+    mkdir /data/misc/dhcp 0770 dhcp wifi
+    chown dhcp wifi /data/misc/dhcp
 
     # Bluetooth
     mkdir /data/@btmtk 0770 bluetooth net_bt
@@ -273,6 +294,7 @@ on post-fs-data
     mkdir /data/nfc_socket 0771 nfc radio
 
 on post-fs
+
     exec /system/xbin/mknod /dev/wmtWifi c 153 0
     chmod 0660 /dev/wmtWifi
     chown system system /dev/wmtWifi
@@ -337,7 +359,6 @@ on fs
     mkdir /protect_s 0771 system system
 
     mount_all /fstab.mt6592
-    #setprop ro.crypto.fuse_sdcard true
 
     write /proc/bootprof "INIT:NAND:Mount_END"
 
@@ -481,6 +502,13 @@ service memsicd3416x /system/bin/memsicd3416x
     group system
     class main
 
+service memsicd3416xfhd /system/bin/memsicd3416xfhd
+     disabled
+	 user system
+    group system
+    class main
+    oneshot
+
 service akmd8975 /system/bin/akmd8975
     disabled
     user system
@@ -582,19 +610,6 @@ service BGW /system/xbin/BGW
     group gps system radio
     class main
     oneshot
-
-# virtual sdcard daemon running as media_rw (1023)
-service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard0 /storage/sdcard0
-    class late_start
-    disabled
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbotg /storage/usbotg
-    class late_start
-    disabled
-
-
 # CM Performance Profiles
 
 # Powersave
