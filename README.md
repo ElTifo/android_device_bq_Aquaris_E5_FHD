@@ -1,3 +1,7 @@
+# W.I.P.
+
+Trying to adapt kingzone k1 turbo specs to Aquaris E5 FHD (similar MT6592 device) in order to build CM12.1 from source
+
 # Build
 
 * Working
@@ -14,7 +18,7 @@
 
 * Compilation
 
-        # repo init -u git://github.com/fire855/android.git -b cm-12.1
+        # repo init -u git://github.com/ElTifo/android-mtk.git -b cm-12.1_Aquaris_E5_FHD (STILL W.I.P. DO NOT USE)
         
         # repo sync
         
