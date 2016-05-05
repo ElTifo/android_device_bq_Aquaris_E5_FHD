@@ -39,3 +39,20 @@ Services requires root:
   * surfaceflinger depends on sched_setscheduler calls, unable to change process priority from 'system' user (default user 'system')
 
   * mediaserver depends on /data/nvram folder access, unable to do voice calls from 'media' user (default user 'media')
+
+# CREDITS
+
+Big thanks to all MTK developers for making this available to MTK devices
+
+  * fire855
+  * Axet
+  * chrmhoffmann
+  * DerTeufel1980
+  * Al3XKOoL
+  * kashifmin
+  * Santhosh M
+  * ariafan
+  * ferhung-mtk
+  * superdragonpt
+  * hyperion70
+  * CyanogenMod Team
