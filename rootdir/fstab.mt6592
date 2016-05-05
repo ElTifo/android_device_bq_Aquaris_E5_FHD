@@ -9,6 +9,6 @@
 /emmc@protect_s /protect_s  ext4    noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc  wait,check,autoformat
 #Storage
 #<src>                                          <mnt_point> <type>  <mnt_flags and options> <fs_mgr_flags>
-/devices/platform/mtk-msdc.0/mmc_host/mmc0/mmc0 auto	      vfat    defaults	              voldmanaged=sdcard0:emmc@fat,nonremovable,noemulatedsd
-/devices/platform/mtk-msdc.1/mmc_host/mmc1/mmc1 auto	      vfat    defaults	              voldmanaged=sdcard1:auto
+/devices/platform/mtk-msdc.0/mmc_host/mmc0/mmc0 auto        vfat    defaults                voldmanaged=sdcard0:emmc@fat,nonremovable,noemulatedsd
+/devices/platform/mtk-msdc.1/mmc_host/mmc1/mmc1 auto        vfat    defaults                voldmanaged=sdcard1:auto
 /devices/platform/mt_usb                        auto        vfat    defaults                voldmanaged=usbotg:auto
