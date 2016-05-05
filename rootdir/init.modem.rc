@@ -12,23 +12,23 @@ on post-fs-data
     mkdir /data/nvram/md 0770 root system
     mkdir /data/nvram/md2 0770 root system
 
-#  Build-in Modified - S
-#    insmod /system/lib/modules/ccci_plat.ko
-#    insmod /system/lib/modules/ccci.ko
-#  Build-in Modified - E
-#   chown ccci ccci /sys/class/BOOT/BOOT/boot/md
+    #  Build-in Modified - S
+    #  insmod /system/lib/modules/ccci_plat.ko
+    #  insmod /system/lib/modules/ccci.ko
+    #  Build-in Modified - E
+    #  chown ccci ccci /sys/class/BOOT/BOOT/boot/md
     chown radio radio /sys/kernel/ccci/boot
 
     # xplod: this is not in the original mtk file... But I have no
     # idea what kind of sorcery normally sets them
-	# ElTifo: I've added more lines to match the current files present on my FHD stock ROM
+    # ElTifo: I've added more lines to match the current files present on my FHD stock ROM
     chown radio radio /dev/ccci_fs
     chown radio radio /dev/ccci_ioctl0
     chown radio radio /dev/ccci_ioctl1
-	chown radio radio /dev/ccci_ioctl2
-	chown radio radio /dev/ccci_ioctl3
-	chown radio radio /dev/ccci_ioctl4
-	chown radio radio /dev/ccci_ipc_2
+    chown radio radio /dev/ccci_ioctl2
+    chown radio radio /dev/ccci_ioctl3
+    chown radio radio /dev/ccci_ioctl4
+    chown radio radio /dev/ccci_ipc_2
     chown radio radio /dev/ccci_ipc_1220_0
     chown radio radio /dev/ccci_md_log_rx
     chown radio radio /dev/ccci_md_log_tx
@@ -61,9 +61,9 @@ service ril-daemon /system/bin/rild
     class core
     socket rild stream 660 root radio
     socket rild2 stream 660 root radio
-	socket rild3 stream 660 root radio
+    socket rild3 stream 660 root radio
     socket rild4 stream 660 root radio
-	socket rild-ims stream 660 root radio
+    socket rild-ims stream 660 root radio
     socket rild-debug stream 660 radio system
     socket rild-oem stream 660 radio system
     socket rild-mtk-ut stream 660 radio net_bt
