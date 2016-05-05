@@ -112,7 +112,7 @@ on fs_property:ro.mount.fs=EXT4
     mount ext4 /emmc@usrdata /data noatime nosuid nodev wait commit=1,nodelalloc,noauto_da_alloc
     # mount cip partitions
     exec /sbin/e2fsck -p /emmc@custom
-	mount ext4 /emmc@custom /custom	
+    mount ext4 /emmc@custom /custom	
     write /proc/bootprof "INIT:eMMC:Mount_END"
 
 on fs_property:ro.mount.fs=UBIFS
@@ -139,8 +139,8 @@ on post-fs
     chown system system /data
     chmod 0771 /data
 
-# create basic filesystem structure
-		mkdir /data/nvram 2770 root nvram
+    # create basic filesystem structure
+    mkdir /data/nvram 2770 root nvram
     mkdir /data/misc 01771 system misc
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
     mkdir /data/misc/bluetooth 0770 system system
@@ -189,8 +189,8 @@ on post-fs
     # OpenCORE proxy config
     chmod 0666 /data/http-proxy-cfg
 
-	# OpenCORE player config
-	chmod 0666 /etc/player.cfg
+    # OpenCORE player config
+    chmod 0666 /etc/player.cfg
 
     # WiFi
     mkdir /data/misc/wifi 0770 system wifi
@@ -232,8 +232,8 @@ on post-fs
     
     chown system camera /dev/camera-isp
 
-    #VideoCodec
-    #insmod /system/lib/modules/vcodec_kernel_driver.ko
+    # VideoCodec
+    # insmod /system/lib/modules/vcodec_kernel_driver.ko
     mknod /dev/Vcodec c 160 0
     chmod 0660 /dev/Vcodec
     chown system media /dev/Vcodec
@@ -244,12 +244,12 @@ on post-fs
     chown root system /dev/sec
     
     # device info interface
-    #insmod /system/lib/modules/devinfo.ko
+    # insmod /system/lib/modules/devinfo.ko
     mknod /dev/devmap c 196 0;
     chmod 0440 /dev/devmap
     chown root system /dev/devmap
 
-   #change partition permission
+    # change partition permission
     chmod 0640 /emmc@sec_ro
     chown root system /emmc@sec_ro
 
@@ -279,7 +279,7 @@ on post-fs
   
     chmod 0666 /dev/uio0
 
-    #otp
+    # otp
     chmod 0660 /proc/driver/otp
     chown root system /proc/driver/otp
 
