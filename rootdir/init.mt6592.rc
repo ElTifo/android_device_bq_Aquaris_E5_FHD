@@ -248,7 +248,7 @@ on init
     # TV-out
     chmod 0664 /dev/TV-out
 
-    #HDMI
+    # HDMI
     chown media graphics /dev/hdmitx
     chmod 0664 /dev/hdmitx
 
@@ -256,7 +256,7 @@ on init
     chmod 0444 /dev/mtk_jpeg
     chown system camera /dev/mtk_jpeg
 	
-	#ALMK
+    # ALMK
     chmod 0440 /dev/mtk_almk
 
     # DISP
@@ -268,12 +268,12 @@ on post-fs-data
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
-	chmod 0660 /data/misc/wifi/p2p_supplicant.conf
+    chmod 0660 /data/misc/wifi/p2p_supplicant.conf
     
-	mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
 	
-	# dhcp server
+    # dhcp server
     mkdir /data/misc/dhcp 0770 dhcp wifi
     chown dhcp wifi /data/misc/dhcp
 
@@ -491,20 +491,20 @@ service ami304d /system/bin/ami304d
     class main
 
 service memsicd /system/bin/memsicd
-     disabled
+    disabled
     user system
     group system
     class main
 
 service memsicd3416x /system/bin/memsicd3416x
-     disabled
-	 user system
+    disabled
+    user system
     group system
     class main
 
 service memsicd3416xfhd /system/bin/memsicd3416xfhd
-     disabled
-	 user system
+    disabled
+    user system
     group system
     class main
     oneshot
@@ -546,8 +546,8 @@ service mc6420d /system/bin/mc6420d
     class main
     
 service qmc5983d /system/bin/qmc5983d
-     disabled
-	 user system
+    disabled
+    user system
     group system
     class main
 
